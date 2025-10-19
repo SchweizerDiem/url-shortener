@@ -20,8 +20,9 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String home(Model model){
-		List<ShortUrl> shortUrls = shortUrlRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
-		model.addAttribute("title", "URL Shortener - Thymeleaf");
+		List<ShortUrl> shortUrls = shortUrlRepository.findPublicShortUrls();
+		model.addAttribute("shortUrls", shortUrls);
+		model.addAttribute("baseUrl", "http://localhost:8080");
 		return "index";
 	}
 }
